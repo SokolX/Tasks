@@ -9,7 +9,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -25,12 +24,39 @@ class SimpleEmailServiceTest {
     @Test
     public void shouldSendEmail() {
         //Given
-        Mail mail = new Mail("test@test.com", "Test", "Test Message");
+        Mail mail = Mail.builder()
+                .mailTo("test@test.com")
+                .subject("test")
+                .message("Test")
+                .build();
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(mail.getMailTo());
-        mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mail.getMessage());
+        mailMessage.setTo(mail.mailTo());
+        mailMessage.setSubject(mail.subject());
+        mailMessage.setText(mail.message());
+
+        //When
+        simpleEmailService.send(mail);
+
+        //Then
+        verify(javaMailSender, times(1)).send(mailMessage);
+    }
+
+    @Test
+    public void shouldSendEmailWithCc() {
+        //Given
+        Mail mail = Mail.builder()
+                .mailTo("test@test.com")
+                .subject("test")
+                .message("Test")
+                .toCc("testCc@test.cc.com")
+                .build();
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(mail.mailTo());
+        mailMessage.setSubject(mail.subject());
+        mailMessage.setText(mail.message());
+        mailMessage.setCc(mail.toCc());
 
         //When
         simpleEmailService.send(mail);
