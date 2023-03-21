@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class TrelloMapperTestSuite {
 
-    private TrelloMapper trelloMapper = new TrelloMapper();
+    private final TrelloMapper trelloMapper = new TrelloMapper();
 
     @Test
     void shouldReturnBoardsFromMap() {
