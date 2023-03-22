@@ -36,7 +36,7 @@ class TrelloMapperTestSuite {
     }
 
     @Test
-    void shouldReturnBardsDtoFromMap() {
+    void shouldReturnBoardsDtoFromMap() {
         //Given
         TrelloList trelloList1 = new TrelloList("1", "first", false);
         TrelloList trelloList2 = new TrelloList("1", "second", false);
