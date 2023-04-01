@@ -31,7 +31,7 @@ public class TrelloService {
         ofNullable(newCard).ifPresent(card -> emailService.send(Mail.builder()
                         .mailTo(adminConfig.getAdminMail())
                         .subject(SUBJECT_TASKS_NEW_TRELLO_CARD)
-                        .message("New Card " + trelloCardDto.getName() + "has been created on your Trello account")
+                        .message("New Card: " + trelloCardDto.getName() + " has been created on your Trello account")
                         .build()
         ));
 
