@@ -32,6 +32,7 @@ public class TrelloService {
                         .mailTo(adminConfig.getAdminMail())
                         .subject(SUBJECT_TASKS_NEW_TRELLO_CARD)
                         .message("New Card: " + trelloCardDto.getName() + " has been created on your Trello account")
+                        .templatePath("mail/created-trello-card-mail")
                         .build()
         ));
 

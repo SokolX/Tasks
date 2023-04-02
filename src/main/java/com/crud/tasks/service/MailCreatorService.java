@@ -22,7 +22,7 @@ public class MailCreatorService {
     @Qualifier("templateEngine")
     private TemplateEngine templateEngine;
 
-    public String buildTrelloCardEmail(String message) {
+    public String buildTrelloCardEmail(String message, String templatePath) {
         List<String> functionality = new ArrayList<>();
         functionality.add("You can manage your tasks");
         functionality.add("Provides connection with Trello Account");
@@ -39,6 +39,6 @@ public class MailCreatorService {
         context.setVariable("company_name", appConfig.getCompanyName());
         context.setVariable("company_goal", appConfig.getCompanyGoal());
         context.setVariable("application_functionality", functionality);
-        return templateEngine.process("mail/created-trello-card-mail", context);
+        return templateEngine.process(templatePath, context);
     }
 }
